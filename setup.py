@@ -18,13 +18,12 @@ def setup_package():
 
         # See also setup.cfg
         setup(
-            name="UpSetPlot",
+            name="upsetplot-bombcell",
             version=version,
             packages=["upsetplot"],
             license="BSD-3-Clause",
-            extras_require={"testing": ["pytest>=2.7", "pytest-cov<2.6"]},
-            # TODO: check versions
-            install_requires=["pandas>=0.23", "matplotlib>=2.0"],
+            extras_require={"testing": ["pytest>=2.7", "pytest-cov"]},
+            install_requires=["pandas>=1.0", "matplotlib>=3.0"],
         )
     finally:
         del sys.path[0]

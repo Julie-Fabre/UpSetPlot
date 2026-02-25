@@ -197,7 +197,9 @@ def from_indicators(indicators, data=None):
             # column array
             indicators = data[indicators]
 
-    indicators = pd.DataFrame(indicators).fillna(False).infer_objects()
+    indicators = pd.DataFrame(indicators)
+    # Fill NaN with False, using where() to avoid pandas FutureWarning about downcasting
+    indicators = indicators.where(pd.notna(indicators), False).infer_objects(copy=False)
     # drop all-False (should we be dropping all-True also? making an option?)
     indicators = indicators.loc[:, indicators.any(axis=0)]
 
@@ -222,6 +224,11 @@ def from_indicators(indicators, data=None):
         data = pd.Series(np.ones(len(indicators)), name="ones")
 
     indicators.set_index(list(indicators.columns), inplace=True)
+    # Ensure we always have a MultiIndex, even with a single category
+    if not isinstance(indicators.index, pd.MultiIndex):
+        indicators.index = pd.MultiIndex.from_arrays(
+            [indicators.index], names=[indicators.index.name]
+        )
     data.index = indicators.index
 
     return data
@@ -300,9 +307,12 @@ def from_memberships(memberships, data=None):
     if df.shape[1] == 0:
         raise ValueError("Require at least one category. None were found.")
     df.sort_index(axis=1, inplace=True)
-    df.fillna(False, inplace=True)
-    df = df.astype(bool)
+    # Convert to bool, treating NaN as False (avoids pandas FutureWarning)
+    df = df.eq(True)
     df.set_index(list(df.columns), inplace=True)
+    # Ensure we always have a MultiIndex, even with a single category
+    if not isinstance(df.index, pd.MultiIndex):
+        df.index = pd.MultiIndex.from_arrays([df.index], names=[df.index.name])
     if data is None:
         return df.assign(ones=1)["ones"]
 
@@ -382,7 +392,8 @@ def from_contents(contents, data=None, id_column="id"):
     df = pd.concat(cat_series, axis=1, sort=False)
     if id_column in df.columns:
         raise ValueError("A category cannot be named %r" % id_column)
-    df.fillna(False, inplace=True)
+    # Convert to bool, treating NaN as False (avoids pandas FutureWarning)
+    df = df.eq(True)
     cat_names = list(df.columns)
 
     if data is not None:
@@ -396,7 +407,14 @@ def from_contents(contents, data=None, id_column="id"):
                 "Found identifiers in contents that are not in "
                 "data: %r" % not_in_data.index.values
             )
-        df = df.reindex(index=data.index).fillna(False)
+        # Use eq(True) to convert NaN to False without FutureWarning
+        df = df.reindex(index=data.index).eq(True)
         df = pd.concat([data, df], axis=1, sort=False)
     df.index.name = id_column
-    return df.reset_index().set_index(cat_names)
+    result = df.reset_index().set_index(cat_names)
+    # Ensure we always have a MultiIndex, even with a single category
+    if not isinstance(result.index, pd.MultiIndex):
+        result.index = pd.MultiIndex.from_arrays(
+            [result.index], names=[result.index.name]
+        )
+    return result

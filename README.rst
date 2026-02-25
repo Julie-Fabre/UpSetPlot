@@ -5,6 +5,13 @@ UpSetPlot documentation
 
 |issues| |build| |docs| |coverage|
 
+.. note::
+
+   This is a fork of the `original UpSetPlot repository <https://github.com/jnothman/UpSetPlot>`_,
+   which appears to be unmaintained (last updated 3+ years ago). This fork is maintained
+   to ensure compatibility with modern pandas versions and for use with
+   `BombCell <https://github.com/Julie-Fabre/bombcell>`_.
+
 This is another Python implementation of UpSet plots by Lex et al. [Lex2014]_.
 UpSet plots are used to visualise set overlaps; like Venn diagrams but
 more readable. Documentation is at https://upsetplot.readthedocs.io.
