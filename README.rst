@@ -173,7 +173,6 @@ References
 
 .. |build| image:: https://github.com/jnothman/upsetplot/actions/workflows/test.yml/badge.svg
     :alt: Github Workflows CI build status
-    :scale: 100%
     :target: https://github.com/jnothman/UpSetPlot/actions/workflows/test.yml
 
 .. |issues| image:: https://img.shields.io/github/issues/jnothman/UpSetPlot.svg
@@ -186,7 +185,6 @@ References
 
 .. |docs| image:: https://readthedocs.org/projects/upsetplot/badge/?version=latest
      :alt: Documentation Status
-     :scale: 100%
      :target: https://upsetplot.readthedocs.io/en/latest/?badge=latest
 
 .. |licence| image:: https://img.shields.io/badge/Licence-BSD-blue.svg

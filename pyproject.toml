@@ -1,3 +1,51 @@
+[build-system]
+requires = ["setuptools>=61.0,<77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "upsetplot-bombcell"
+version = "0.10.0"
+description = "Draw UpSet plots with Pandas and Matplotlib (maintained fork for BombCell)"
+readme = "README.rst"
+license = {text = "BSD-3-Clause"}
+authors = [
+    {name = "Joel Nothman", email = "joel.nothman@gmail.com"},
+]
+maintainers = [
+    {name = "Julie Fabre", email = "julie.m.fabre@gmail.com"},
+]
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Visualization",
+]
+dependencies = [
+    "pandas>=1.0",
+    "matplotlib>=3.0",
+]
+
+[project.optional-dependencies]
+testing = ["pytest>=2.7", "pytest-cov"]
+
+[project.urls]
+Homepage = "https://github.com/Julie-Fabre/UpSetPlot"
+Repository = "https://github.com/Julie-Fabre/UpSetPlot"
+Issues = "https://github.com/Julie-Fabre/UpSetPlot/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.setuptools]
+include-package-data = true
+
 [tool.ruff]
 extend-include = ["*.ipynb"]
 target-version = "py38"
