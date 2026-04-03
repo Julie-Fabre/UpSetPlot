@@ -901,7 +901,7 @@ class UpSet:
                 return (val / self.total,)
 
         if where == "right":
-            margin = 0.01 * abs(np.diff(ax.get_xlim()))
+            margin = 0.01 * abs(np.diff(ax.get_xlim())[0])
             for rect in rects:
                 width = rect.get_width() + rect.get_x()
                 ax.text(
@@ -912,7 +912,7 @@ class UpSet:
                     va="center",
                 )
         elif where == "left":
-            margin = 0.01 * abs(np.diff(ax.get_xlim()))
+            margin = 0.01 * abs(np.diff(ax.get_xlim())[0])
             for rect in rects:
                 width = rect.get_width() + rect.get_x()
                 ax.text(
@@ -923,7 +923,7 @@ class UpSet:
                     va="center",
                 )
         elif where == "top":
-            margin = 0.01 * abs(np.diff(ax.get_ylim()))
+            margin = 0.01 * abs(np.diff(ax.get_ylim())[0])
             for rect in rects:
                 height = rect.get_height() + rect.get_y()
                 ax.text(
