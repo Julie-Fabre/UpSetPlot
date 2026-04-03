@@ -9,7 +9,7 @@ UpSetPlot documentation
 
    This is a fork of the `original UpSetPlot repository <https://github.com/jnothman/UpSetPlot>`_,
    which appears to be unmaintained (last updated 3+ years ago). This fork is maintained
-   to ensure compatibility with modern pandas versions and for use with
+   to ensure compatibility with
    `BombCell <https://github.com/Julie-Fabre/bombcell>`_.
 
 This is another Python implementation of UpSet plots by Lex et al. [Lex2014]_.
